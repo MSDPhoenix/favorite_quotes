@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Books</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="wrapper1">
+        <div id="header">
+            <h1 class="purple">Welcome, <a href="/display_user_information">{{user.first_name}}!</a> </h1>
+            <a id="logout"href="/logout">log out</a>
+        </div>
+        <div id="wrapper2">
+            <div class="column" class="vertical_align_top">
+                <h3 class="purple"><u><i>{{user.first_name}} {{user.last_name}}</i></u></h3>
+                <div id="book_information1" class="vertical_align_top">
+                    <p><b>First Name: </b></p>
+                    <p><b>Last Name: </b></p>
+                    <p><b>Email: </b></p>
+                    <p><b>Birthday: </b></p>
+                    <p><b>Joined on: </b></p>
+                </div>
+                <div id="book_information2">
+                    <p>{{user.first_name}}</p>
+                    <p>{{user.last_name}}</p>
+                    <p>{{user.email}}</p>
+                    <p>{{user.birthday|date:"M j, Y"}}</p>
+                    <p>{{user.created_at|date:"M j, Y"}}</p>
+                </div>
+                <div id="page_3_links">
+                    <a href="/success">Go back</a>
+                    <a href="/edit_user_information">Edit user information</a>
+                </div>
+            </div>
+            <div class="column text_align_left" >
+                <h3 class="purple"> <u><i>Your Favorite Quotes</i></u></h3>
+                {% for quote in quotes %}
+                    <h4>"{{quote.quote}}"</h4>
+                    <div class="shift_right">
+                        <p><i> - {{quote.author}}</i></p>
+                        <p>Added by <a href="/all_quotes_by_user/{{quote.added_by.id}}">{{quote.added_by.first_name}} {{quote.added_by.last_name}}</a></p>
+                        {% if quote.liked_by.count == 1 %}
+                            <p>{{quote.liked_by.count}} like</p>
+                        {% else %}
+                            <p>{{quote.liked_by.count}} likes</p>
+                        {% endif %}
+                        {% if user in quote.liked_by.all %}
+                            <a href="/like_quote/{{quote.id}}/5">unlike</a>
+                        {% else %}
+                            <a href="/like_quote/{{quote.id}}/5">like</a>
+                        {% endif %}
+                        {% if quote.added_by == user %}
+                        <a href="/delete_quote/{{quote.id}}/5">delete</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div> {% comment %} END OF wrapper2 {% endcomment %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Books</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="wrapper1">
+        <div id="header">
+            <h4 class="purple">Edit My Account</h4>
+            <span>
+                <a href="/success">Back</a>
+                <a id="logout"href="/logout">log out</a>
+            </span>
+        </div>
+        {% if messages %}
+            <div id="errors_div">
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ messages.tags }}" {% endif %}> {{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <div id="wrapper2">
+            <div class="column3" class="vertical_align_top">
+                <form action="/update_user_information" method="post" class="length-40">
+                    {% csrf_token %}
+                    <label for="first_name" >First Name</label>
+                    <input type="text" name="first_name" value="{{first_name}}">
+                    <div class="spacer-div"></div>
+
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" value="{{last_name}}">
+                    <div class="spacer-div"></div>
+
+                    <label for="email">Email</label>
+                    <input type="text" name="email" value="{{email}}">
+                    <div class="spacer-div"></div>
+
+                    <div class="length-40_div"></div>
+                    <input type="submit" value="Update">
+                </form>
+
+                <!-- <div id="page_3_links">
+                    <a href="/display_user_information">Go back</a>
+                    <a href="/success">All favorite quotes</a>
+                </div>
+            </div> -->
+
+            <!-- <div class="column text_align_left" >
+                <h3 class="purple"> <u><i>Your Favorite Quotes</i></u></h3>
+                {% for quote in quotes %}
+                    <h4>"{{quote.quote}}"</h4>
+                    <div class="shift_right">
+                        <p><i> - {{quote.author}}</i></p>
+                        <p>Added by <a href="/all_quotes_by_user/{{quote.added_by.id}}">{{quote.added_by.first_name}} {{quote.added_by.last_name}}</a></p>
+                        {% if quote.liked_by.count == 1 %}
+                            <p>{{quote.liked_by.count}} like</p>
+                        {% else %}
+                            <p>{{quote.liked_by.count}} likes</p>
+                        {% endif %}
+                        {% if user in quote.liked_by.all %}
+                            <a href="/like_quote/{{quote.id}}/6">unlike</a>
+                        {% else %}
+                            <a href="/like_quote/{{quote.id}}/6">like</a>
+                        {% endif %}
+                        {% if quote.added_by == user %}
+                        <a href="/delete_quote/{{quote.id}}/6">delete</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div> -->
+        </div> {% comment %} END OF wrapper2 {% endcomment %}
+    </div>
+</body>
+</html>
