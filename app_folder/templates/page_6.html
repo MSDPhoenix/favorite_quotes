@@ -40,48 +40,15 @@
                     <label for="first_name" >First Name</label>
                     <input type="text" name="first_name" value="{{first_name}}">
                     <div class="spacer-div"></div>
-
                     <label for="last_name">Last Name</label>
                     <input type="text" name="last_name" value="{{last_name}}">
                     <div class="spacer-div"></div>
-
                     <label for="email">Email</label>
                     <input type="text" name="email" value="{{email}}">
                     <div class="spacer-div"></div>
-
                     <div class="length-40_div"></div>
                     <input type="submit" value="Update">
                 </form>
-
-                <!-- <div id="page_3_links">
-                    <a href="/display_user_information">Go back</a>
-                    <a href="/success">All favorite quotes</a>
-                </div>
-            </div> -->
-
-            <!-- <div class="column text_align_left" >
-                <h3 class="purple"> <u><i>Your Favorite Quotes</i></u></h3>
-                {% for quote in quotes %}
-                    <h4>"{{quote.quote}}"</h4>
-                    <div class="shift_right">
-                        <p><i> - {{quote.author}}</i></p>
-                        <p>Added by <a href="/all_quotes_by_user/{{quote.added_by.id}}">{{quote.added_by.first_name}} {{quote.added_by.last_name}}</a></p>
-                        {% if quote.liked_by.count == 1 %}
-                            <p>{{quote.liked_by.count}} like</p>
-                        {% else %}
-                            <p>{{quote.liked_by.count}} likes</p>
-                        {% endif %}
-                        {% if user in quote.liked_by.all %}
-                            <a href="/like_quote/{{quote.id}}/6">unlike</a>
-                        {% else %}
-                            <a href="/like_quote/{{quote.id}}/6">like</a>
-                        {% endif %}
-                        {% if quote.added_by == user %}
-                        <a href="/delete_quote/{{quote.id}}/6">delete</a>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            </div> -->
         </div> {% comment %} END OF wrapper2 {% endcomment %}
     </div>
 </body>

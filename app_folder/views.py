@@ -24,12 +24,6 @@ def register(request):
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request,value)
-        # request.session['first_name'] = request.POST['first_name']
-        # request.session['last_name'] = request.POST['last_name']
-        # request.session['birthday'] = request.POST['birthday']
-        # request.session['email'] = request.POST['email']
-        # request.session['password'] = request.POST['password']
-        # request.session['confirm_password'] = request.POST['confirm_password']
         return redirect('/')
     else:
         request.session.flush()
@@ -48,8 +42,6 @@ def login(request):
     if len(errors) > 0:
         for key,value in errors.items():
             messages.error(request,value)
-        request.session['email'] = request.POST['email']
-        request.session['password'] = request.POST['password']
         return redirect('/')
     else:
         request.session.flush()
@@ -70,7 +62,6 @@ def add_favorite_quote(request):
         if len(errors) > 0:
             for key,value in errors.items():
                 messages.error(request,value)
-            # return redirect('/success')
         else:        
             user = User.objects.get(id=user_id)
             quote = request.POST['quote']
