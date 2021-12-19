@@ -66,16 +66,6 @@ class Manager2(models.Manager):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not EMAIL_REGEX.match(postData['email']):
             errors['email'] = "Must use valid email address"
-        # if postData['birthday']:
-        #     now = datetime.now()
-        #     birthday = datetime.strptime(postData['birthday'],"%Y-%m-%d")
-        #     minimum_age = timedelta(days=4848)
-        #     if now - birthday < minimum_age and birthday < now:
-        #         errors['birthday2'] = "Must be at least 13 years old"
-        #     if birthday > now:
-        #         errors['birthday1'] = "Birthday must be in the past"
-        # else:
-        #     errors['birthday3'] = "Birthday is required"
         return errors
 
 class User(models.Model):
